@@ -7,11 +7,18 @@ Animes.quotes = {
   attackOnTitan: require("./assets/attackOnTitan/quotes.json"),
 };
 
-// Import backgrounds
-Animes.backgrounds = {
+// Import background info
+Animes.backgroundInfo = {
   naruto: require("./assets/naruto/backgrounds.json"),
   haikyu: require("./assets/haikyu/backgrounds.json"),
   attackOnTitan: require("./assets/attackOnTitan/backgrounds.json"),
 };
+
+// Import background images
+Animes.backgroundImages = {
+    naruto: require("./assets/naruto/backgrounds"),
+    haikyu: require("./assets/haikyu/backgrounds"),
+    attackOnTitan: require("./assets/attackOnTitan/backgrounds"),
+}
 
 export default Animes;

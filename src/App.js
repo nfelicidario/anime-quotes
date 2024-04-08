@@ -1,20 +1,11 @@
+import React from 'react';
 import Animes from "./AnimeIndex";
 
 function App() {
-  const narutoContext = require.context('./assets/naruto/backgrounds', false, /\.(jpg|jpeg|png)$/);
-  const narutoBackgroundImages = narutoContext.keys().map(narutoContext);
-
-  const haikyuContext = require.context('./assets/haikyu/backgrounds', false, /\.(jpg|jpeg|png)$/);
-  const haikyuBackgroundImages = haikyuContext.keys().map(haikyuContext);
-
-  const attackOnTitanContext = require.context('./assets/attackOnTitan/backgrounds', false, /\.(jpg|jpeg|png)$/);
-  const attackOnTitanBackgroundImages = attackOnTitanContext.keys().map(attackOnTitanContext);
-
-
   const animeMap = {
-    1: { name: "naruto", quotes: Animes.quotes["naruto"], backgrounds: Animes.backgrounds["naruto"], backgroundImages: narutoBackgroundImages },
-    2: { name: "haikyu", quotes: Animes.quotes["haikyu"], backgrounds: Animes.backgrounds["haikyu"], backgroundImages: haikyuBackgroundImages },
-    3: { name: "attackOnTitan", quotes: Animes.quotes["attackOnTitan"], backgrounds: Animes.backgrounds["attackOnTitan"], backgroundImages: attackOnTitanBackgroundImages }
+    1: { name: "naruto", quotes: Animes.quotes["naruto"], backgrounds: Animes.backgroundInfo["naruto"] },
+    2: { name: "haikyu", quotes: Animes.quotes["haikyu"], backgrounds: Animes.backgroundInfo["haikyu"] },
+    // 3: { name: "attackOnTitan", quotes: Animes.quotes["attackOnTitan"], backgrounds: Animes.backgroundInfo["attackOnTitan"], backgroundImages: Animes.backgroundImages["attackOnTitan"] }
   };
 
   const randomAnimeNumber = Math.floor(Math.random() * Object.keys(animeMap).length) + 1;
@@ -45,22 +36,32 @@ function App() {
   const { url, attribution, attributionUrl, fileName } = getRandomAnimeBackground();
 
   const backgroundStyle = {
-    backgroundImage: `url(${animeInfo.backgroundImages[randomBackgroundNumber]})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundImage: `url(backgrounds/${animeInfo.name}/${fileName})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   };
 
   return (
-    <div style={backgroundStyle} className="bg-blue-500 text-black h-screen">
-      <h1>Quote: {quote}</h1>
-      <h1>Speaker: {speaker}</h1>
-      <h1>Anime: {anime}</h1>
-      <h1>Attribution: {attribution}</h1>
-      <h1>{backgroundStyle.backgroundImage}</h1>
-      <h1>URL: {url}</h1>
-      <h1>{fileName}</h1>
-      <h1>{randomBackgroundNumber}</h1>
-      <h1>{animeInfo.backgroundImages[randomBackgroundNumber]}</h1>
+    <div style={backgroundStyle} className="bg-black text-white h-screen flex flex-col align-middle justify-center items-center relative overflow-hidden">
+      <div className='text-white text-center h-screen'>
+
+        {/* Middle Content */}
+        <div className='absolute flex flex-col inset-0 items-center justify-center xl:px-64 lg:px-48 md:px-32 sm:px-20'>
+          <div className='font-oswald text-6xl mb-10 leading-18' style={{ textShadow: '0px 0px 25px rgba(0, 0, 0, 0.8), 0px 0px 25px rgba(0, 0, 0, 0.8), 0px 0px 25px rgba(0, 0, 0, 0.8)' }}>
+            <p>{quote}</p>
+          </div>
+          <div className='font-rubik text-2xl' style={{ textShadow: '0px 0px 15px rgba(0, 0, 0, 0.8), 0px 0px 15px rgba(0, 0, 0, 0.8), 0px 0px 15px rgba(0, 0, 0, 0.8)' }}>
+            <p>{speaker}</p>
+          </div>
+        </div>
+
+        {/* Bottom Content */}
+        <div className="absolute flex flex-col inset-0 items-center justify-end px-64 text-xs text-white text-opacity-50 mb-2" style={{ textShadow: '0px 0px 7px rgba(0, 0, 0, 0.8), 0px 0px 7px rgba(0, 0, 0, 0.8)'}}>
+          <p className='mb-1'>Quote From: {anime}</p>
+          <p><a href={attributionUrl} target="_blank">Background {attribution}</a></p>
+        </div>
+
+      </div>
     </div>
   );
 }
