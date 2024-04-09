@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Animes from "./AnimeIndex";
+import Clock from './Clock';
 
 function App() {
   const animeMap = {
@@ -9,8 +10,6 @@ function App() {
     4: { name: "demonSlayer", quotes: Animes.quotes["demonSlayer"], backgrounds: Animes.backgroundInfo["demonSlayer"] },
     5: { name: "onePiece", quotes: Animes.quotes["onePiece"], backgrounds: Animes.backgroundInfo["onePiece"] }
   };
-
-  const [currentTime, setCurrentTime] = useState('');
 
   const randomAnimeNumber = Math.floor(Math.random() * Object.keys(animeMap).length) + 1;
   const animeInfo = animeMap[randomAnimeNumber];
@@ -44,21 +43,6 @@ function App() {
     backgroundPosition: 'center',
   };
 
-  const updateTime = () => {
-    const now = new Date();
-    let hours = now.getHours();
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = now.getSeconds();
-    const meridiem = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12; // Convert to 12-hour format
-
-    setCurrentTime(`${hours}:${minutes}`);
-  };
-
-  useEffect(() => {
-    updateTime();
-  }, []);
-
   return (
     <div style={backgroundStyle} className="bg-black text-white h-screen flex flex-col align-middle justify-center items-center relative overflow-hidden">
       <div className='text-white text-center h-screen'>
@@ -66,7 +50,7 @@ function App() {
         {/* Middle Content */}
         <div className='absolute flex flex-col inset-0 items-center justify-center xl:px-64 lg:px-48 md:px-32 sm:px-20'>
           <div className='font-rubik font-medium text-9xl' style={{ textShadow: '0px 0px 25px rgba(0, 0, 0, 0.8), 0px 0px 25px rgba(0, 0, 0, 0.8), 0px 0px 25px rgba(0, 0, 0, 0.8)' }}>
-            <p>{currentTime}</p>
+            <Clock/>
           </div>
           <div className='font-oswald text-6xl mt-10 mb-10 leading-18' style={{ textShadow: '0px 0px 25px rgba(0, 0, 0, 0.8), 0px 0px 25px rgba(0, 0, 0, 0.8), 0px 0px 25px rgba(0, 0, 0, 0.8)' }}>
             <p>{quote}</p>
