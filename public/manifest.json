@@ -4,10 +4,10 @@
   "description": "Start each new tab with motivational and iconic quotes from your favorite animes.",
   "version": "1.0",
   "icons": {
-    "16": "assets/jewish_quotes-logo-16.png",
-    "32": "assets/jewish_quotes-logo-32.png",
-    "48": "assets/jewish_quotes-logo-48.png",
-    "128": "assets/jewish_quotes-logo-128.png"
+    "16": "assets/anime_quotes-logo-16.png",
+    "32": "assets/anime_quotes-logo-32.png",
+    "48": "assets/anime_quotes-logo-48.png",
+    "128": "assets/anime_quotes-logo-128.png"
   },
   "chrome_url_overrides": {
     "newtab": "index.html"
